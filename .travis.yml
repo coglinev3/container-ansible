@@ -31,9 +31,9 @@ env:
     - CONTAINER_DISTRO: alpine-3.9
       CONTAINER_CMD: /sbin/init
 
-# install:
-#   # Install Ansible and Python Docker Module
-#   - pip3 install ansible ansible-bender docker
+install:
+  # Install Ansible and Python Docker Module
+  - pip3 install ansible docker
 
 before_script:
   # Configure Ansible
