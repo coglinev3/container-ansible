@@ -55,14 +55,14 @@ script:
 after_success:
   # Start a container from the new created image
   - >
-    cid=$(docker run -d --rm --name check_ansible
+    cid=$(podman run -d --rm --name check_ansible
     ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO})
   # show container os-release
-  - docker exec ${cid} env TERM=xterm cat /etc/os-release
+  - podman exec ${cid} env TERM=xterm cat /etc/os-release
   # show container python version
-  - docker exec ${cid} env TERM=xterm ansible --version
+  - podman exec ${cid} env TERM=xterm ansible --version
   # Stop the container
-  - docker stop ${cid}
+  - podman stop ${cid}
 
 #deploy:
 #  provider: script
