@@ -26,6 +26,10 @@ env:
     - CONTAINER_DISTRO: alpine-3.11
       CONTAINER_CMD: /sbin/init
       IMAGE_ALTERNATE_TAG: latest
+    - CONTAINER_DISTRO: alpine-3.10
+      CONTAINER_CMD: /sbin/init
+    - CONTAINER_DISTRO: alpine-3.9
+      CONTAINER_CMD: /sbin/init
 
 install:
   # Install Ansible and Python Docker Module
