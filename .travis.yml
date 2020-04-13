@@ -31,9 +31,9 @@ env:
     - CONTAINER_DISTRO: alpine-3.9
       CONTAINER_CMD: /sbin/init
 
-install:
-  # Install Ansible and Python Docker Module
-  - pip3 install ansible ansible-bender docker
+# install:
+#   # Install Ansible and Python Docker Module
+#   - pip3 install ansible ansible-bender docker
 
 before_script:
   # Configure Ansible
@@ -50,7 +50,7 @@ before_script:
 
 script:
   # Build image with Ansible-Bender
-  - ansible-bender build --no-cache container-ansible.yml
+  - env ANSIBLE_FORCE_COLOR=1 ansible-bender build --no-cache container-ansible.yml
 
 after_success:
   # Start a container from the new created image
