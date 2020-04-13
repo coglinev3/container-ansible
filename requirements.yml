@@ -1,0 +1,6 @@
+---
+# Install needed roles from Ansible Galaxy
+
+- src: coglinev3.ansible_container
+  version: master
+  name: coglinev3.ansible_container
