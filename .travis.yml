@@ -30,6 +30,18 @@ env:
       CONTAINER_CMD: /sbin/init
     - CONTAINER_DISTRO: alpine-3.9
       CONTAINER_CMD: /sbin/init
+    - CONTAINER_DISTRO: centos-7
+    - CONTAINER_DISTRO: centos-8
+    - CONTAINER_DISTRO: debian-9
+      CONTAINER_CMD: /bin/systemd
+    - CONTAINER_DISTRO: debian-10
+      CONTAINER_CMD: /bin/systemd
+    - CONTAINER_DISTRO: ubuntu-16.04
+      CONTAINER_CMD: /sbin/init
+    - CONTAINER_DISTRO: ubuntu-18.04
+      CONTAINER_CMD: /bin/systemd
+    - CONTAINER_DISTRO: ubuntu-19.10
+      CONTAINER_CMD: /bin/systemd
 
 install:
   # Install Ansible and Python Docker Module
@@ -69,4 +81,4 @@ after_success:
 #  script: bash scripts/docker_push
 #  cleanup: false
 #  on:
-#    branch: master
+#    branch: maste/bin/systemd
