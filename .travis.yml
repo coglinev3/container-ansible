@@ -88,4 +88,4 @@ deploy:
   script: bash scripts/docker_push
   cleanup: false
   on:
-    branch: develop
+    branch: master
