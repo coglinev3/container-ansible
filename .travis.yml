@@ -70,9 +70,9 @@ after_success:
     cid=$(podman run -d --rm --name check_ansible
     ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO})
   # show container os-release
-  - podman exec ${cid} env TERM=xterm cat /etc/os-release
+  - podman exec --user ansible ${cid} env TERM=xterm cat /etc/os-release
   # show container python version
-  - podman exec ${cid} -u ansible env TERM=xterm ansible --version
+  - podman exec --user ansible ${cid} env TERM=xterm ansible --version
   # Stop the container
   - podman stop ${cid}
 
