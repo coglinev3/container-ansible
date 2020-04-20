@@ -72,7 +72,7 @@ after_success:
   # show container os-release
   - podman exec ${cid} env TERM=xterm cat /etc/os-release
   # show container python version
-  - podman exec ${cid} env TERM=xterm ansible --version
+  - podman exec ${cid} -u ansible env TERM=xterm ansible --version
   # Stop the container
   - podman stop ${cid}
 
