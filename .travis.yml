@@ -34,14 +34,19 @@ env:
     - CONTAINER_DISTRO: centos-8
     - CONTAINER_DISTRO: debian-9
       CONTAINER_CMD: /bin/systemd
+      IMAGE_ALTERNATE_TAG: debian-stretch
     - CONTAINER_DISTRO: debian-10
       CONTAINER_CMD: /bin/systemd
+      IMAGE_ALTERNATE_TAG: debian-buster
     - CONTAINER_DISTRO: ubuntu-16.04
       CONTAINER_CMD: /sbin/init
+      IMAGE_ALTERNATE_TAG: ubuntu-xenial
     - CONTAINER_DISTRO: ubuntu-18.04
       CONTAINER_CMD: /bin/systemd
+      IMAGE_ALTERNATE_TAG: ubuntu-bionic
     - CONTAINER_DISTRO: ubuntu-19.10
       CONTAINER_CMD: /bin/systemd
+      IMAGE_ALTERNATE_TAG: ubuntu-eoan
 
 install:
   # Install Ansible and Python Docker Module
@@ -75,10 +80,12 @@ after_success:
   - podman exec --user ansible ${cid} env TERM=xterm ansible --version
   # Stop the container
   - podman stop ${cid}
+  # push image to docker-daemon
+  - podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO} docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
 
-#deploy:
-#  provider: script
-#  script: bash scripts/docker_push
-#  cleanup: false
-#  on:
-#    branch: maste/bin/systemd
+deploy:
+  provider: script
+  script: bash scripts/docker_push
+  cleanup: false
+  on:
+    branch: develop
