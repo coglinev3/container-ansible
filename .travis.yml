@@ -74,6 +74,7 @@ script:
   - >
     echo Start a container from the new created image
     && cid=$(podman run -d --rm --name check_ansible
+    --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro
     ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO})
   - >
     echo Show container os-release
