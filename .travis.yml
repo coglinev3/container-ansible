@@ -32,6 +32,8 @@ env:
       CONTAINER_CMD: /sbin/init
     - CONTAINER_DISTRO: centos-7
     - CONTAINER_DISTRO: centos-8
+    - CONTAINER_DISTRO: debian-8
+      CONTAINER_CMD: /sbin/init
     - CONTAINER_DISTRO: debian-9
       CONTAINER_CMD: /bin/systemd
       IMAGE_ALTERNATE_TAG: debian-stretch
@@ -66,22 +68,32 @@ before_script:
   - ansible-playbook .travis/ansible-bender.yml
 
 script:
-  # Build image with Ansible-Bender
-  - env ANSIBLE_FORCE_COLOR=1 ansible-bender build --no-cache container-ansible.yml
+  - >
+    echo Build image with Ansible-Bender
+    && env ANSIBLE_FORCE_COLOR=1 ansible-bender build --no-cache container-ansible.yml
+  - >
+    echo Start a container from the new created image
+    && cid=$(podman run -d --rm --name check_ansible
+    ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO})
+  - >
+    echo Show container os-release
+    && podman exec --user ansible ${cid} env TERM=xterm cat /etc/os-release
+  - >
+    echo Show container python version
+    && podman exec --user ansible ${cid} env TERM=xterm ansible --version
+  - >
+    echo Check if SSH is running
+    && podman exec --user ansible ${cid} env TERM=xterm
+    /bin/sh -c "ps -ef | grep ssh"
+  - >
+    echo Stop the container
+    && podman stop ${cid}
 
 after_success:
-  # Start a container from the new created image
   - >
-    cid=$(podman run -d --rm --name check_ansible
-    ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO})
-  # show container os-release
-  - podman exec --user ansible ${cid} env TERM=xterm cat /etc/os-release
-  # show container python version
-  - podman exec --user ansible ${cid} env TERM=xterm ansible --version
-  # Stop the container
-  - podman stop ${cid}
-  # push image to docker-daemon
-  - podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO} docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+    echo push image to docker-daemon
+    && podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+    docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
 
 deploy:
   provider: script
