@@ -72,29 +72,27 @@ script:
     echo Build image with Ansible-Bender
     && env ANSIBLE_FORCE_COLOR=1 ansible-bender build --no-cache container-ansible.yml
   - >
+    echo push image to docker-daemon
+    && podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+    docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+  - >
     echo Start a container from the new created image
-    && cid=$(podman run -d --rm --name check_ansible
+    && cid=$(docker run -d --rm --name check_ansible
     --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro
     ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO})
   - >
     echo Show container os-release
-    && podman exec --user ansible ${cid} env TERM=xterm cat /etc/os-release
+    && docker exec --user ansible ${cid} env TERM=xterm cat /etc/os-release
   - >
     echo Show container python version
-    && podman exec --user ansible ${cid} env TERM=xterm ansible --version
+    && docker exec --user ansible ${cid} env TERM=xterm ansible --version
   - >
     echo Check if SSH is running
-    && podman exec --user ansible ${cid} env TERM=xterm
+    && docker exec --user ansible ${cid} env TERM=xterm
     /bin/sh -c "ps -ef | grep ssh"
   - >
     echo Stop the container
-    && podman stop ${cid}
-
-after_success:
-  - >
-    echo push image to docker-daemon
-    && podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
-    docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+    && docker stop ${cid}
 
 deploy:
   provider: script
