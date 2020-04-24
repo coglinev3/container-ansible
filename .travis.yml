@@ -81,6 +81,9 @@ script:
     --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro
     ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO})
   - >
+    echo Show docker processes
+    && docker ps -a
+  - >
     echo Show container os-release
     && docker exec --user ansible ${cid} env TERM=xterm cat /etc/os-release
   - >
