@@ -1,0 +1,33 @@
+---
+- name: Build Ansible container
+  hosts: all
+  vars:
+    image_namespace: "{{ lookup('env','IMAGE_NAMESPACE') | default('coglinev3', true) }}"
+    image_name: "{{ lookup('env','IMAGE_NAME') | default('ansible', true) }}"
+    base_image_name: "{{ lookup('env','BASE_IMAGE_NAME') | default('python', true) }}"
+    container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('centos-7', true) }}"
+    # configuration specific for ansible-bender
+    ansible_bender:
+      # base_image: coglinev3/python:centos-7
+      base_image: "{{ image_namespace }}/{{ base_image_name }}:{{ container_distro }}"
+      target_image:
+        # command to run by default when invoking the container
+        cmd: "{{ lookup('env','CONTAINER_CMD') | default('/usr/sbin/init', true) }}"
+        # name: coglinev3/ansible:centos-7
+        name: "{{ image_namespace }}/{{ image_name }}:{{ container_distro }}"
+        labels:
+          build-by: "Cogline.v3"
+        volumes:
+          - /sys/fs/cgroup
+        # user: ansible
+        # working_dir: /ansible
+  tasks:
+    - name: Include role coglinev3.ansible_container
+      include_role:
+        name: coglinev3.ansible_container
+      vars:
+        ansible_container_become: false
+      tags:
+        - stop-layering
+
+# vim:set nu expandtab ts=2 sw=2 sts=2:

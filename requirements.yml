@@ -1,0 +1,10 @@
+---
+# Install needed roles from Ansible Galaxy
+
+- src: coglinev3.ansible_container
+  version: master
+  name: coglinev3.ansible_container
+
+- src: coglinev3.ansible_bender
+  version: master
+  name: coglinev3.ansible_bender

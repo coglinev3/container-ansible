@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Login to docker.io
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+# push the image
+docker push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+
+# push alternate tag if available
+if ! [ -z $IMAGE_ALTERNATE_TAG ]; then
+  docker tag ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO} ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG}
+  docker push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG}
+fi
+
+# Logout from docker.io
+docker logout

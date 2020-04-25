@@ -1,0 +1,105 @@
+---
+dist: bionic
+addons:
+  apt:
+    packages:
+      - docker-ce
+      - libssl-dev
+      - libffi-dev
+      - python3
+      - python3-pip
+      - python3-setuptools
+      - python3-software-properties
+      - python3-wheel
+
+language: minimal
+
+services:
+  - docker
+
+env:
+  global:
+    - IMAGE_NAMESPACE: coglinev3
+    - BASE_IMAGE_NAME: python
+    - IMAGE_NAME: ansible
+  matrix:
+    - CONTAINER_DISTRO: alpine-3.11
+      CONTAINER_CMD: /sbin/init
+      IMAGE_ALTERNATE_TAG: latest
+    - CONTAINER_DISTRO: alpine-3.10
+      CONTAINER_CMD: /sbin/init
+    - CONTAINER_DISTRO: alpine-3.9
+      CONTAINER_CMD: /sbin/init
+    - CONTAINER_DISTRO: centos-7
+    - CONTAINER_DISTRO: centos-8
+    - CONTAINER_DISTRO: debian-8
+      CONTAINER_CMD: /sbin/init
+    - CONTAINER_DISTRO: debian-9
+      CONTAINER_CMD: /bin/systemd
+      IMAGE_ALTERNATE_TAG: debian-stretch
+    - CONTAINER_DISTRO: debian-10
+      CONTAINER_CMD: /bin/systemd
+      IMAGE_ALTERNATE_TAG: debian-buster
+    - CONTAINER_DISTRO: ubuntu-16.04
+      CONTAINER_CMD: /sbin/init
+      IMAGE_ALTERNATE_TAG: ubuntu-xenial
+    - CONTAINER_DISTRO: ubuntu-18.04
+      CONTAINER_CMD: /bin/systemd
+      IMAGE_ALTERNATE_TAG: ubuntu-bionic
+    - CONTAINER_DISTRO: ubuntu-19.10
+      CONTAINER_CMD: /bin/systemd
+      IMAGE_ALTERNATE_TAG: ubuntu-eoan
+
+install:
+  # Install Ansible and Python Docker Module
+  - pip3 install ansible docker
+
+before_script:
+  # Configure Ansible
+  - cp .travis/ansible.cfg ~/.ansible.cfg
+  - mkdir -p ~/.ansible && cp .travis/hosts ~/.ansible
+  # Show Ansible version
+  - ansible --version
+  # Create roles directory
+  - mkdir -p ~/.ansible/roles
+  # Install required Ansible Role(s)
+  - ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
+  # Install Ansible-Bender
+  - ansible-playbook .travis/ansible-bender.yml
+
+script:
+  - >
+    echo Build image with Ansible-Bender
+    && env ANSIBLE_FORCE_COLOR=1 ansible-bender build --no-cache container-ansible.yml
+  - >
+    echo push image to docker-daemon
+    && podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+    docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+  - >
+    echo Start a container from the new created image
+    && cid=$(docker run -d --rm --name check_ansible
+    --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro
+    ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO})
+  - >
+    echo Show docker processes
+    && docker ps -a
+  - >
+    echo Show container os-release
+    && docker exec --user ansible ${cid} env TERM=xterm cat /etc/os-release
+  - >
+    echo Show container Ansible version
+    && docker exec --user ansible ${cid} env TERM=xterm ansible --version
+  - >
+    echo Check if SSH is running
+    && docker exec --user ansible ${cid} env TERM=xterm
+    /bin/sh -c "ps -ef | grep ssh"
+  - >
+    echo Stop the container
+    && docker stop ${cid}
+
+deploy:
+  provider: script
+  script: bash scripts/docker_push
+  cleanup: false
+  on:
+    branch: master

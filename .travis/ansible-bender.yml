@@ -1,0 +1,4 @@
+---
+- hosts: local
+  roles:
+    - { role: coglinev3.ansible_bender }
