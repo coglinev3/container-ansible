@@ -87,7 +87,7 @@ script:
     echo Show container os-release
     && docker exec --user ansible ${cid} env TERM=xterm cat /etc/os-release
   - >
-    echo Show container python version
+    echo Show container Ansible version
     && docker exec --user ansible ${cid} env TERM=xterm ansible --version
   - >
     echo Check if SSH is running
