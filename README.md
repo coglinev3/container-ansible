@@ -15,6 +15,7 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `centos-7`: CentOS 7
   - `debian-10`, `debian-buster`: Debian 10 (Buster)
   - `debian-9`, `debian-stretch`: Debian 9 (Stretch)
+  - `debian-8`, `debian-jessie`: Debian 8 (jessie)
   - `ubuntu-19.10`, `ubuntu-eoan`: Ubuntu 19.10 (Eoan Ermine)
   - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
   - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
@@ -56,7 +57,7 @@ ansible-bender build ./playbook.yml
 
 ## Version
 
-Release: x.y.z
+Release: 1.0.0
 
 ## License
 
