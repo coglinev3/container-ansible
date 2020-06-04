@@ -8,17 +8,22 @@ The images were built with the help of [ansible-bender](https://ansible-communit
 
 ## Tags
 
-  - `alpine-3.11`, `latest`: Alpine Linux 3.11
+  - `alpine-3.11`: `latest`, Alpine Linux 3.11
   - `alpine-3.10`: Alpine Linux 3.10
   - `alpine-3.9`: Alpine Linux 3.9
   - `centos-8`: CentOS 8
   - `centos-7`: CentOS 7
-  - `debian-10`, `debian-buster`: Debian 10 (Buster)
-  - `debian-9`, `debian-stretch`: Debian 9 (Stretch)
-  - `debian-8`, `debian-jessie`: Debian 8 (jessie)
-  - `ubuntu-19.10`, `ubuntu-eoan`: Ubuntu 19.10 (Eoan Ermine)
-  - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
-  - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
+  - `debian-10`: `debian-buster`, Debian 10 (Buster)
+  - `debian-9`: `debian-stretch`, Debian 9 (Stretch)
+  - `debian-8`: `debian-jessie`, Debian 8 (jessie)
+  - `fedora-29`: Fedore 29
+  - `fedora-30`: Fedore 30
+  - `fedora-31`: Fedore 31
+  - `fedora-32`: Fedore 32
+  - `ubuntu-20.04`: `ubuntu-focal`, Ubuntu 20.04 LTS (Focal Fossa)
+  - `ubuntu-19.10`: `ubuntu-eoan`, Ubuntu 19.10 (Eoan Ermine)
+  - `ubuntu-18.04`: `ubuntu-bionic`, Ubuntu 18.04 LTS (Bionic Beaver)
+  - `ubuntu-16.04`: `ubuntu-xenial`, Ubuntu 16.04 LTS (Xenial Xerus)
 
 ## Example
 
