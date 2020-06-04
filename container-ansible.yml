@@ -19,8 +19,6 @@
           build-by: "Cogline.v3"
         volumes:
           - /sys/fs/cgroup
-        # user: ansible
-        # working_dir: /ansible
   tasks:
     - name: Include role coglinev3.ansible_container
       include_role:
