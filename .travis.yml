@@ -93,11 +93,12 @@ script:
     echo Show docker processes
     && docker ps -a
   - >
-    echo Show container os-release
-    && docker exec --user ansible ${cid} env TERM=xterm cat /etc/os-release
-  - >
     echo Show container Ansible version
     && docker exec --user ansible ${cid} env TERM=xterm ansible --version
+  - >
+    echo Show container os-release
+    && docker exec --user ansible ${cid} env TERM=xterm
+    /bin/sh -c "ansible local -m setup -a 'filter=ansible_distribution*'"
   - >
     echo Check if SSH is running
     && docker exec --user ansible ${cid} env TERM=xterm
