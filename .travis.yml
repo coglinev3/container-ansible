@@ -98,7 +98,7 @@ script:
   - >
     echo Show container os-release
     && docker exec --user ansible ${cid} env TERM=xterm
-    /bin/sh -c "ansible local -m setup -a 'filter=ansible_distribution*'"
+    /bin/sh -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
   - >
     echo Check if SSH is running
     && docker exec --user ansible ${cid} env TERM=xterm
