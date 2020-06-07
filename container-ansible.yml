@@ -25,6 +25,8 @@
         name: coglinev3.ansible_container
       vars:
         ansible_container_become: false
+        ansible_container_force_config: "yes"
+        ansible_container_force_inventory: "yes"
       tags:
         - stop-layering
 
