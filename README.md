@@ -17,10 +17,10 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `debian-10`: `debian-buster`, Debian 10 (Buster)
   - `debian-9`: `debian-stretch`, Debian 9 (Stretch)
   - `debian-8`: `debian-jessie`, Debian 8 (jessie)
-  - `fedora-29`: Fedore 29
-  - `fedora-30`: Fedore 30
-  - `fedora-31`: Fedore 31
   - `fedora-32`: Fedore 32
+  - `fedora-31`: Fedore 31
+  - `fedora-30`: Fedore 30
+  - `fedora-29`: Fedore 29
   - `ubuntu-20.04`: `ubuntu-focal`, Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-19.10`: `ubuntu-eoan`, Ubuntu 19.10 (Eoan Ermine)
   - `ubuntu-18.04`: `ubuntu-bionic`, Ubuntu 18.04 LTS (Bionic Beaver)
@@ -53,6 +53,10 @@ Here is an example playbook to create a CentOS 7 image with Ansible and Systemd
       name: ansible_container
     vars:
       ansible_container_become: false
+      ansible_container_force_config: "yes"
+      ansible_container_force_inventory: "yes"
+    tags:
+      - stop-layering
 ```
 
 The new conatiner image is build with:
@@ -63,7 +67,7 @@ ansible-bender build ./playbook.yml
 
 ## Version
 
-Release: 1.1.1
+Release: 1.2.0
 
 ## License
 
