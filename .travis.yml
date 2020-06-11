@@ -23,6 +23,8 @@ env:
     - BASE_IMAGE_NAME: python
     - IMAGE_NAME: ansible
   matrix:
+    - CONTAINER_DISTRO: alpine-3.12
+      CONTAINER_CMD: /sbin/init
     - CONTAINER_DISTRO: alpine-3.11
       CONTAINER_CMD: /sbin/init
       IMAGE_ALTERNATE_TAG: latest
