@@ -1,9 +1,8 @@
 ---
-dist: bionic
+dist: focal
 addons:
   apt:
     packages:
-      - docker-ce
       - libssl-dev
       - libffi-dev
       - python3
