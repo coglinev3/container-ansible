@@ -43,8 +43,6 @@ env:
     - CONTAINER_DISTRO: debian-10
       CONTAINER_CMD: /bin/systemd
       IMAGE_ALTERNATE_TAG: debian-buster
-    - CONTAINER_DISTRO: fedora-29
-    - CONTAINER_DISTRO: fedora-30
     - CONTAINER_DISTRO: fedora-31
     - CONTAINER_DISTRO: fedora-32
     - CONTAINER_DISTRO: ubuntu-16.04
@@ -53,9 +51,6 @@ env:
     - CONTAINER_DISTRO: ubuntu-18.04
       CONTAINER_CMD: /bin/systemd
       IMAGE_ALTERNATE_TAG: ubuntu-bionic
-    - CONTAINER_DISTRO: ubuntu-19.10
-      CONTAINER_CMD: /bin/systemd
-      IMAGE_ALTERNATE_TAG: ubuntu-eoan
     - CONTAINER_DISTRO: ubuntu-20.04
       CONTAINER_CMD: /bin/systemd
       IMAGE_ALTERNATE_TAG: ubuntu-focal
