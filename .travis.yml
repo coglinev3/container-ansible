@@ -31,8 +31,6 @@ env:
       CONTAINER_CMD: /sbin/init
     - CONTAINER_DISTRO: alpine-3.9
       CONTAINER_CMD: /sbin/init
-    - CONTAINER_DISTRO: centos-6
-      CONTAINER_CMD: /sbin/init
     - CONTAINER_DISTRO: centos-7
     - CONTAINER_DISTRO: centos-8
     - CONTAINER_DISTRO: debian-8
