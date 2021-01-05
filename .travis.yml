@@ -41,7 +41,6 @@ env:
     - CONTAINER_DISTRO: debian-10
       CONTAINER_CMD: /bin/systemd
       IMAGE_ALTERNATE_TAG: debian-buster
-    - CONTAINER_DISTRO: fedora-31
     - CONTAINER_DISTRO: fedora-32
     - CONTAINER_DISTRO: ubuntu-16.04
       CONTAINER_CMD: /sbin/init

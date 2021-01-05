@@ -18,7 +18,6 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `debian-9`: `debian-stretch`, Debian 9 (Stretch)
   - `debian-8`: `debian-jessie`, Debian 8 (jessie)
   - `fedora-32`: Fedore 32
-  - `fedora-31`: Fedore 31
   - `ubuntu-20.04`: `ubuntu-focal`, Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-18.04`: `ubuntu-bionic`, Ubuntu 18.04 LTS (Bionic Beaver)
   - `ubuntu-16.04`: `ubuntu-xenial`, Ubuntu 16.04 LTS (Xenial Xerus)
