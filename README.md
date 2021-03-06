@@ -8,7 +8,8 @@ The images were built with the help of [ansible-bender](https://ansible-communit
 
 ## Tags
 
-  - `alpine-3.12`: `latest`, Alpine Linux 3.12
+  - `alpine-3.13`: `latest`, Alpine Linux 3.13
+  - `alpine-3.12`: Alpine Linux 3.12
   - `alpine-3.11`: Alpine Linux 3.11
   - `alpine-3.10`: Alpine Linux 3.10
   - `alpine-3.9`: Alpine Linux 3.9
