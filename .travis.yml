@@ -67,10 +67,15 @@ before_script:
   - ansible --version
   # Create roles directory
   - mkdir -p ~/.ansible/roles
+  # Configure storage driver for podman
+  - mkdir -p ~/.config/containers && cp .travis/storage.conf ~/.config/containers
   # Install required Ansible Role(s)
   - ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
   # Install Ansible-Bender
   - ansible-playbook .travis/ansible-bender.yml
+  # Check buildah and podman version
+  - podman version
+  - buildah version
 
 script:
   - >
