@@ -1,0 +1,7 @@
+---
+- hosts: local
+  vars:
+    ab_users:
+      - runner
+  roles:
+    - {role: coglinev3.ansible_bender}

@@ -1,6 +1,6 @@
 # container-ansible: Container images with Ansible build by ansible-bender
 
-[![Build Status](https://travis-ci.com/coglinev3/container-ansible.svg?branch=master)](https://travis-ci.com/coglinev3/container-ansible) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/coglinev3/container-ansible) [![GitHub license](https://img.shields.io/github/license/coglinev3/container-ansible)](https://github.com/coglinev3/container-python/blob/master/LICENSE)
+[![Build](https://github.com/coglinev3/container-ansible/actions/workflows/build.yml/badge.svg)](https://github.com/coglinev3/container-ansible/actions/workflows/build.yml) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/coglinev3/container-ansible) [![GitHub license](https://img.shields.io/github/license/coglinev3/container-ansible)](https://github.com/coglinev3/container-python/blob/master/LICENSE)
 
 Linux Images with [Ansible](https://docs.ansible.com/ansible/latest/index.html "Ansible Documentation") for testing Ansible roles with [Ansible Molecule](https://molecule.readthedocs.io/en/latest/ "Ansible Molecule Documentation") and a continuous integration platform like [Travis-CI](https://docs.travis-ci.com/ "Travis-CI Documentation"). All images contain Python, Ansible, SSH, Sudo and an init system (sysvinit or systemd), so that these images can be used for almost all tests as a replacement for a full-fledged virtual machine, such as for testing `service` management functionality.
 
