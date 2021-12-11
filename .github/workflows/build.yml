@@ -43,9 +43,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - CONTAINER_DISTRO: alpine-3.13
+          - CONTAINER_DISTRO: alpine-3.14
             CONTAINER_CMD: /sbin/init
             IMAGE_ALTERNATE_TAG: latest
+          - CONTAINER_DISTRO: alpine-3.13
+            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.12
             CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.11
@@ -93,6 +95,9 @@ jobs:
           echo "CONTAINER_CMD=${{ matrix.CONTAINER_CMD }}" >> $GITHUB_ENV
           echo "IMAGE_ALTERNATE_TAG=${{ matrix.IMAGE_ALTERNATE_TAG }}" >> $GITHUB_ENV
 
+      - name: Debug informations
+        run: whoami; id; getent passwd; getent group
+
       - name: Install Ansible
         run: pip3 install --upgrade ansible docker jsonschema testresources
 
@@ -115,6 +120,7 @@ jobs:
         run: |
           mkdir -p ~/.config/containers
           cp .github/storage.conf ~/.config/containers
+          mkdir -p /home/runner/.local/share/containers/storage
 
       - name: Install Ansible-Bender
         run: ansible-playbook .github/ansible-bender.yml
@@ -122,7 +128,12 @@ jobs:
       - name: Create storage state directory
         run: |
           sudo mkdir -p /run/user/${UID}/run
-          sudo chown -R runner /run/user/${UID}
+          sudo chown -R runner:docker /run/user/${UID}
+          sudo mkdir  /tmp/1001
+          sudo chown -R runner:docker /tmp/1001
+          ls -la /run/user
+          ls -la /tmp/1001
+          ls -la /proc/self/
 
       - name: Check buildah and podman version
         run: |
@@ -131,38 +142,57 @@ jobs:
           echo "buildah version"
           buildah version
 
+      - name: Show buildah and podman info
+        run: |
+          echo "podman info"
+          podman info
+          echo "buildah info"
+          buildah info
+
       - name: Build image with Ansible-Bender
         run: ansible-bender build --no-cache container-ansible.yml
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
 
+      - name: Show local podman images
+        run: podman images
+
+#      - name: Push image to docker daemon
+#        run: >
+#          podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+#          docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+#
+#      - name: Inspect local podman image
+#        run: podman inspect localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+#
 #      - name: Start a container from the new created image
 #        run: >
-#          sudo podman run -d --rm --name check_ansible
-#          ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+#          podman --log-level=debug run -d --name check_ansible
+#          --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro
+#          localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
 #
 #      - name: Show container processes
-#        run: sudo podman ps -a
+#        run: podman ps -a
 #
 #      - name: Show container Ansible version
 #        run: >
-#          sudo podman exec --user ansible check_ansible env TERM=xterm
+#          podman exec --user ansible check_ansible env TERM=xterm
 #          ansible --version
 #
 #      - name: Show container os-release
 #        run: >
-#          sudo podman exec --user ansible check_ansible env TERM=xterm
+#          podman exec --user ansible check_ansible env TERM=xterm
 #          /bin/sh -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
 #
 #      - name: Check if SSH is running inside the container
 #        run: >
-#          sudo podman exec --user ansible check_ansible env TERM=xterm
+#          podman exec --user ansible check_ansible env TERM=xterm
 #          /bin/sh -c "ps -ef | grep ssh"
 #
 #      - name: Stop the container
-#        run: sudo podman stop check_ansible
-
+#        run: podman stop check_ansible
+#
       - name: Push image to DockerHub
         run: bash scripts/docker_push
         if: github.ref == 'refs/heads/master'
