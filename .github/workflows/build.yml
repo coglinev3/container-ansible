@@ -55,7 +55,7 @@ jobs:
           - CONTAINER_DISTRO: alpine-3.9
             CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: centos-7
-          - CONTAINER_DISTRO: centos-8
+          # - CONTAINER_DISTRO: centos-8
           - CONTAINER_DISTRO: debian-8
             CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: debian-9
@@ -137,31 +137,31 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
 
-      - name: Start a container from the new created image
-        run: >
-          sudo podman run -d --rm --name check_ansible
-          ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
-
-      - name: Show container processes
-        run: sudo podman ps -a
-
-      - name: Show container Ansible version
-        run: >
-          sudo podman exec --user ansible check_ansible env TERM=xterm
-          ansible --version
-
-      - name: Show container os-release
-        run: >
-          sudo podman exec --user ansible check_ansible env TERM=xterm
-          /bin/sh -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
-
-      - name: Check if SSH is running inside the container
-        run: >
-          sudo podman exec --user ansible check_ansible env TERM=xterm
-          /bin/sh -c "ps -ef | grep ssh"
-
-      - name: Stop the container
-        run: sudo podman stop check_ansible
+#      - name: Start a container from the new created image
+#        run: >
+#          sudo podman run -d --rm --name check_ansible
+#          ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+#
+#      - name: Show container processes
+#        run: sudo podman ps -a
+#
+#      - name: Show container Ansible version
+#        run: >
+#          sudo podman exec --user ansible check_ansible env TERM=xterm
+#          ansible --version
+#
+#      - name: Show container os-release
+#        run: >
+#          sudo podman exec --user ansible check_ansible env TERM=xterm
+#          /bin/sh -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
+#
+#      - name: Check if SSH is running inside the container
+#        run: >
+#          sudo podman exec --user ansible check_ansible env TERM=xterm
+#          /bin/sh -c "ps -ef | grep ssh"
+#
+#      - name: Stop the container
+#        run: sudo podman stop check_ansible
 
       - name: Push image to DockerHub
         run: bash scripts/docker_push
