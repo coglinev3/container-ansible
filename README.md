@@ -14,7 +14,6 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `alpine-3.11` : Alpine Linux 3.11
   - `alpine-3.10` : Alpine Linux 3.10
   - `alpine-3.9` : Alpine Linux 3.9
-  - `centos-8` : CentOS 8
   - `centos-7` : CentOS 7
   - `debian-10`, `debian-buster` : Debian 10 (Buster)
   - `debian-9`, `debian-stretch` : Debian 9 (Stretch)
@@ -67,7 +66,7 @@ ansible-bender build ./playbook.yml
 
 ## Version
 
-Release: 1.6.0
+Release: 1.7.0
 
 ## License
 
