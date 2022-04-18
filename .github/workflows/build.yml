@@ -43,9 +43,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - CONTAINER_DISTRO: alpine-3.14
+          - CONTAINER_DISTRO: alpine-3.15
             CONTAINER_CMD: /sbin/init
             IMAGE_ALTERNATE_TAG: latest
+          - CONTAINER_DISTRO: alpine-3.14
+            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.13
             CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.12
@@ -158,41 +160,41 @@ jobs:
       - name: Show local podman images
         run: podman images
 
-#      - name: Push image to docker daemon
-#        run: >
-#          podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
-#          docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
-#
-#      - name: Inspect local podman image
-#        run: podman inspect localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
-#
-#      - name: Start a container from the new created image
-#        run: >
-#          podman --log-level=debug run -d --name check_ansible
-#          --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro
-#          localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
-#
-#      - name: Show container processes
-#        run: podman ps -a
-#
-#      - name: Show container Ansible version
-#        run: >
-#          podman exec --user ansible check_ansible env TERM=xterm
-#          ansible --version
-#
-#      - name: Show container os-release
-#        run: >
-#          podman exec --user ansible check_ansible env TERM=xterm
-#          /bin/sh -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
-#
-#      - name: Check if SSH is running inside the container
-#        run: >
-#          podman exec --user ansible check_ansible env TERM=xterm
-#          /bin/sh -c "ps -ef | grep ssh"
-#
-#      - name: Stop the container
-#        run: podman stop check_ansible
-#
+      # - name: Push image to docker daemon
+      #   run: >
+      #     podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+      #     docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+
+      # - name: Inspect local podman image
+      #   run: podman inspect localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+
+      # - name: Start a container from the new created image
+      #   run: >
+      #     podman --log-level=debug run -d --name check_ansible
+      #     --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro
+      #     localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+
+      # - name: Show container processes
+      #   run: podman ps -a
+
+      # - name: Show container Ansible version
+      #   run: >
+      #     podman exec --user ansible check_ansible env TERM=xterm
+      #     ansible --version
+
+      # - name: Show container os-release
+      #   run: >
+      #     podman exec --user ansible check_ansible env TERM=xterm
+      #     /bin/sh -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
+
+      # - name: Check if SSH is running inside the container
+      #   run: >
+      #     podman exec --user ansible check_ansible env TERM=xterm
+      #     /bin/sh -c "ps -ef | grep ssh"
+
+      # - name: Stop the container
+      #   run: podman stop check_ansible
+
       - name: Push image to DockerHub
         run: bash scripts/docker_push
         if: github.ref == 'refs/heads/master'
