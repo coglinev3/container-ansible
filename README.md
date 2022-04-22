@@ -16,6 +16,7 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `alpine-3.10` : Alpine Linux 3.10
   - `alpine-3.9` : Alpine Linux 3.9
   - `centos-7` : CentOS 7
+  - `almalinux-8` : AlmaLinux 8
   - `debian-11`, `debian-bullseye` : Debian 11 (Bullseye)
   - `debian-10`, `debian-buster` : Debian 10 (Buster)
   - `debian-9`, `debian-stretch` : Debian 9 (Stretch)
