@@ -62,12 +62,16 @@ jobs:
           # - CONTAINER_DISTRO: centos-8
           - CONTAINER_DISTRO: debian-8
             CONTAINER_CMD: /sbin/init
+            IMAGE_ALTERNATE_TAG: debian-jessie
           - CONTAINER_DISTRO: debian-9
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: debian-stretch
           - CONTAINER_DISTRO: debian-10
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: debian-buster
+          - CONTAINER_DISTRO: debian-11
+            CONTAINER_CMD: /bin/systemd
+            IMAGE_ALTERNATE_TAG: debian-bullseye
           - CONTAINER_DISTRO: fedora-32
           - CONTAINER_DISTRO: fedora-33
           - CONTAINER_DISTRO: fedora-34
