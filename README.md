@@ -8,7 +8,8 @@ The images were built with the help of [ansible-bender](https://ansible-communit
 
 ## Tags
 
-  - `alpine-3.15`, `latest` : Alpine Linux 3.15
+  - `alpine-3.16`, `latest` : Alpine Linux 3.16
+  - `alpine-3.15` : Alpine Linux 3.15
   - `alpine-3.14` : Alpine Linux 3.14
   - `alpine-3.13` : Alpine Linux 3.13
   - `alpine-3.12` : Alpine Linux 3.12
@@ -19,6 +20,9 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `debian-9`, `debian-stretch` : Debian 9 (Stretch)
   - `debian-8`, `debian-jessie` : Debian 8 (jessie)
   - `fedora-34` : Fedore 34
+  - `fedora-35` : Fedore 35
+  - `fedora-36` : Fedore 36
+  - `ubuntu-22.04`, `ubuntu-jammy` : Ubuntu 22.04 LTS (Jammy Jellyfish)
   - `ubuntu-20.04`, `ubuntu-focal` : Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-18.04`, `ubuntu-bionic` : Ubuntu 18.04 LTS (Bionic Beaver)
 
