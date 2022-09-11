@@ -12,9 +12,6 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `alpine-3.14` : Alpine Linux 3.14
   - `alpine-3.13` : Alpine Linux 3.13
   - `alpine-3.12` : Alpine Linux 3.12
-  - `alpine-3.11` : Alpine Linux 3.11
-  - `alpine-3.10` : Alpine Linux 3.10
-  - `alpine-3.9` : Alpine Linux 3.9
   - `centos-7` : CentOS 7
   - `almalinux-8` : AlmaLinux 8
   - `debian-11`, `debian-bullseye` : Debian 11 (Bullseye)
@@ -22,11 +19,8 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `debian-9`, `debian-stretch` : Debian 9 (Stretch)
   - `debian-8`, `debian-jessie` : Debian 8 (jessie)
   - `fedora-34` : Fedore 34
-  - `fedora-33` : Fedore 33
-  - `fedora-32` : Fedore 32
   - `ubuntu-20.04`, `ubuntu-focal` : Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-18.04`, `ubuntu-bionic` : Ubuntu 18.04 LTS (Bionic Beaver)
-  - `ubuntu-16.04`, `ubuntu-xenial` : Ubuntu 16.04 LTS (Xenial Xerus)
 
 ## Example
 

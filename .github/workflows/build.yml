@@ -52,12 +52,6 @@ jobs:
             CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.12
             CONTAINER_CMD: /sbin/init
-          - CONTAINER_DISTRO: alpine-3.11
-            CONTAINER_CMD: /sbin/init
-          - CONTAINER_DISTRO: alpine-3.10
-            CONTAINER_CMD: /sbin/init
-          - CONTAINER_DISTRO: alpine-3.9
-            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: centos-7
           - CONTAINER_DISTRO: almalinux-8
           - CONTAINER_DISTRO: debian-8
@@ -72,12 +66,7 @@ jobs:
           - CONTAINER_DISTRO: debian-11
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: debian-bullseye
-          - CONTAINER_DISTRO: fedora-32
-          - CONTAINER_DISTRO: fedora-33
           - CONTAINER_DISTRO: fedora-34
-          - CONTAINER_DISTRO: ubuntu-16.04
-            CONTAINER_CMD: /sbin/init
-            IMAGE_ALTERNATE_TAG: ubuntu-xenial
           - CONTAINER_DISTRO: ubuntu-18.04
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: ubuntu-bionic
