@@ -6,6 +6,7 @@ Linux Images with [Ansible](https://docs.ansible.com/ansible/latest/index.html "
 
 The images were built with the help of [ansible-bender](https://ansible-community.github.io/ansible-bender/build/html/index.html "ansible-bender documentation") and the Ansible role [coglinev3.ansible_container](https://galaxy.ansible.com/coglinev3/ansible_container "coglinev3.ansible_container"). Ansible-bender is a tool which bends containers using Ansible playbooks and turns them into container images.
 
+
 ## Tags
 
   - `alpine-3.16`, `latest` : Alpine Linux 3.16
