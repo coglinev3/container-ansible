@@ -1,6 +1,7 @@
 ---
 - hosts: local
   vars:
+    ab_version: 0.9.0
     ab_users:
       - runner
   roles:
