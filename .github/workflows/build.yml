@@ -123,6 +123,9 @@ jobs:
           cp .github/storage.conf ~/.config/containers
           mkdir -p /home/runner/.local/share/containers/storage
 
+      - name: Configure runtime option for libpod
+        run: cp .github/libpod.conf ~/.config/containers
+
       - name: Install Ansible-Bender
         run: ansible-playbook .github/ansible-bender.yml
 
@@ -156,43 +159,31 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
 
-      - name: Show local podman images
-        run: podman images
+      - name: Start a container from the new created image
+        run: >
+          podman run --detach --rm --name check_ansible
+          ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
 
-      # - name: Push image to docker daemon
-      #   run: >
-      #     podman push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
-      #     docker-daemon:${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+      - name: Show container processes
+        run: podman ps -a
 
-      # - name: Inspect local podman image
-      #   run: podman inspect localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+      - name: Show container Ansible version
+        run: >
+          podman exec --user ansible check_ansible env TERM=xterm
+          ansible --version
 
-      # - name: Start a container from the new created image
-      #   run: >
-      #     podman --log-level=debug run -d --name check_ansible
-      #     --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro
-      #     localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+      - name: Show container os-release
+        run: >
+          podman exec --user ansible check_ansible env TERM=xterm
+          /bin/bash -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
 
-      # - name: Show container processes
-      #   run: podman ps -a
+      - name: Check if SSH is running inside the container
+        run: >
+          podman exec --user ansible check_ansible env TERM=xterm
+          /bin/bash -c "ps -ef | grep ssh"
 
-      # - name: Show container Ansible version
-      #   run: >
-      #     podman exec --user ansible check_ansible env TERM=xterm
-      #     ansible --version
-
-      # - name: Show container os-release
-      #   run: >
-      #     podman exec --user ansible check_ansible env TERM=xterm
-      #     /bin/sh -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
-
-      # - name: Check if SSH is running inside the container
-      #   run: >
-      #     podman exec --user ansible check_ansible env TERM=xterm
-      #     /bin/sh -c "ps -ef | grep ssh"
-
-      # - name: Stop the container
-      #   run: podman stop check_ansible
+      - name: Stop the container
+        run: podman stop check_ansible
 
       - name: Push image to DockerHub
         run: bash scripts/docker_push
