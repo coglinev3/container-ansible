@@ -56,9 +56,6 @@ jobs:
             CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: centos-7
           - CONTAINER_DISTRO: almalinux-8
-          - CONTAINER_DISTRO: debian-8
-            CONTAINER_CMD: /sbin/init
-            IMAGE_ALTERNATE_TAG: debian-jessie
           - CONTAINER_DISTRO: debian-9
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: debian-stretch
