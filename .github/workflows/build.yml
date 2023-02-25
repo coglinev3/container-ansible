@@ -70,6 +70,7 @@ jobs:
           - CONTAINER_DISTRO: fedora-34
           - CONTAINER_DISTRO: fedora-35
           - CONTAINER_DISTRO: fedora-36
+          - CONTAINER_DISTRO: fedora-37
           - CONTAINER_DISTRO: ubuntu-18.04
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: ubuntu-bionic
@@ -159,10 +160,16 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
 
+      - name: Show buildah images
+        run: buildah images
+
+      - name: Show podman images
+        run: podman images
+
       - name: Start a container from the new created image
         run: >
           podman run --detach --rm --name check_ansible
-          ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+          localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
 
       - name: Show container processes
         run: podman ps -a
