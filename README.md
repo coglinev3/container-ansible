@@ -70,7 +70,7 @@ ansible-bender build ./playbook.yml
 
 ## Version
 
-Release: 1.10.0
+Release: 1.11.0
 
 ## License
 
@@ -78,4 +78,4 @@ GNU GPLv3
 
 ## Author Information
 
-container-ansible was created in 2020, by Cogline.v3.
+Copyright &copy; 2023 Cogline.v3.
