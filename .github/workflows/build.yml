@@ -18,19 +18,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install yamllint
+        run: python3 -m pip install --upgrade --user pytest ansible yamllint 'ansible-lint==6.12.2'
 
-      - name: Lint code.
-        run: |
-          yamllint .
+      - name: Lint code with yamllint.
+        run: yamllint .
+
+      - name: Lint code with ansible-lint.
+        run: ansible-lint
 
   # Build the images and push them to Docker repository.
   build:
@@ -80,10 +82,10 @@ jobs:
 
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
@@ -208,10 +210,10 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v2
+        uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
