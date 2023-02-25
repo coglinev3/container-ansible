@@ -45,9 +45,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - CONTAINER_DISTRO: alpine-3.16
+          - CONTAINER_DISTRO: alpine-3.17
             CONTAINER_CMD: /sbin/init
             IMAGE_ALTERNATE_TAG: latest
+          - CONTAINER_DISTRO: alpine-3.16
+            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.15
             CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.14
@@ -151,6 +153,7 @@ jobs:
         run: |
           echo "podman info"
           podman info
+          echo
           echo "buildah info"
           buildah info
 
@@ -160,10 +163,7 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
 
-      - name: Show buildah images
-        run: buildah images
-
-      - name: Show podman images
+      - name: Show local images
         run: podman images
 
       - name: Start a container from the new created image
