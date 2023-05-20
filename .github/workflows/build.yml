@@ -72,6 +72,7 @@ jobs:
           - CONTAINER_DISTRO: fedora-35
           - CONTAINER_DISTRO: fedora-36
           - CONTAINER_DISTRO: fedora-37
+          - CONTAINER_DISTRO: fedora-38
           - CONTAINER_DISTRO: ubuntu-18.04
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: ubuntu-bionic
