@@ -61,8 +61,6 @@ jobs:
           - CONTAINER_DISTRO: centos-7
           - CONTAINER_DISTRO: almalinux-8
           - CONTAINER_DISTRO: almalinux-9
-          - CONTAINER_DISTRO: debian-9
-            CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: debian-stretch
           - CONTAINER_DISTRO: debian-10
             CONTAINER_CMD: /bin/systemd

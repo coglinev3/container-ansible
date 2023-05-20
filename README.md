@@ -20,7 +20,6 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `almalinux-9` : AlmaLinux 9
   - `debian-11`, `debian-bullseye` : Debian 11 (Bullseye)
   - `debian-10`, `debian-buster` : Debian 10 (Buster)
-  - `debian-9`, `debian-stretch` : Debian 9 (Stretch)
   - `fedora-34` : Fedore 34
   - `fedora-35` : Fedore 35
   - `fedora-36` : Fedore 36
