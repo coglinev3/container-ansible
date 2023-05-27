@@ -58,6 +58,7 @@ jobs:
             CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.12
             CONTAINER_CMD: /sbin/init
+          - CONTAINER_DISTRO: amazonlinux-2023
           - CONTAINER_DISTRO: centos-7
           - CONTAINER_DISTRO: almalinux-8
           - CONTAINER_DISTRO: almalinux-9

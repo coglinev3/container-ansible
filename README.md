@@ -15,6 +15,7 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `alpine-3.14` : Alpine Linux 3.14
   - `alpine-3.13` : Alpine Linux 3.13
   - `alpine-3.12` : Alpine Linux 3.12
+  - `amazonlinux-2023` : Amazon Linux 2023
   - `centos-7` : CentOS 7
   - `almalinux-8` : AlmaLinux 8
   - `almalinux-9` : AlmaLinux 9
