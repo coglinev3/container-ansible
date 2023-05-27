@@ -5,7 +5,7 @@
     image_namespace: "{{ lookup('env','IMAGE_NAMESPACE') | default('coglinev3', true) }}"
     image_name: "{{ lookup('env','IMAGE_NAME') | default('ansible', true) }}"
     base_image_name: "{{ lookup('env','BASE_IMAGE_NAME') | default('python', true) }}"
-    container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('centos-7', true) }}"
+    container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('alpine-3.17', true) }}"
     # configuration specific for ansible-bender
     ansible_bender:
       # base_image: coglinev3/python:centos-7
