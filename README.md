@@ -75,7 +75,7 @@ ansible-bender build ./playbook.yml
 
 ## Version
 
-Release: 1.12.0
+Release: 1.13.0
 
 ## License
 
@@ -83,4 +83,4 @@ GNU GPLv3
 
 ## Author Information
 
-Copyright &copy; 2023 Cogline.v3.
+Copyright &copy; 2024 Cogline.v3.
