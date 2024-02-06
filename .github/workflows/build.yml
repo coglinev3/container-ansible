@@ -34,9 +34,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - CONTAINER_DISTRO: alpine-3.17
+          - CONTAINER_DISTRO: alpine-3.18
             CONTAINER_CMD: /sbin/init
             IMAGE_ALTERNATE_TAG: latest
+          - CONTAINER_DISTRO: alpine-3.17
+            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.16
             CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.15
@@ -132,6 +134,7 @@ jobs:
         run: |
           echo "podman version"
           podman version
+          echo
           echo "buildah version"
           buildah version
 
