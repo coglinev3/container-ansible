@@ -26,6 +26,7 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `fedora-36` : Fedore 36
   - `fedora-37` : Fedore 37
   - `fedora-38` : Fedore 38
+  - `fedora-39` : Fedore 39
   - `ubuntu-22.04`, `ubuntu-jammy` : Ubuntu 22.04 LTS (Jammy Jellyfish)
   - `ubuntu-20.04`, `ubuntu-focal` : Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-18.04`, `ubuntu-bionic` : Ubuntu 18.04 LTS (Bionic Beaver)

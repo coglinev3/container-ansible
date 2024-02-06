@@ -18,21 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up Python 3.
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install test dependencies.
-        run: python3 -m pip install --upgrade --user pytest ansible yamllint 'ansible-lint==6.12.2'
-
-      - name: Lint code with yamllint.
-        run: yamllint .
-
-      - name: Lint code with ansible-lint.
-        run: ansible-lint
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint-action@main
 
   # Build the images and push them to Docker repository.
   build:
@@ -74,6 +63,7 @@ jobs:
           - CONTAINER_DISTRO: fedora-36
           - CONTAINER_DISTRO: fedora-37
           - CONTAINER_DISTRO: fedora-38
+          - CONTAINER_DISTRO: fedora-39
           - CONTAINER_DISTRO: ubuntu-18.04
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: ubuntu-bionic
@@ -86,12 +76,7 @@ jobs:
 
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v3
-
-      - name: Set up Python 3.
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+        uses: actions/checkout@v4
 
       - name: Set environment variables
         run: |
@@ -209,10 +194,10 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v3
+        uses: peter-evans/dockerhub-description@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
