@@ -21,6 +21,7 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `centos-7` : CentOS 7
   - `almalinux-8` : AlmaLinux 8
   - `almalinux-9` : AlmaLinux 9
+  - `debian-12`, `debian-bookworm` : Debian 12 (Bookworm)
   - `debian-11`, `debian-bullseye` : Debian 11 (Bullseye)
   - `debian-10`, `debian-buster` : Debian 10 (Buster)
   - `fedora-34` : Fedore 34

@@ -55,13 +55,15 @@ jobs:
           - CONTAINER_DISTRO: centos-7
           - CONTAINER_DISTRO: almalinux-8
           - CONTAINER_DISTRO: almalinux-9
-            IMAGE_ALTERNATE_TAG: debian-stretch
           - CONTAINER_DISTRO: debian-10
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: debian-buster
           - CONTAINER_DISTRO: debian-11
             CONTAINER_CMD: /bin/systemd
             IMAGE_ALTERNATE_TAG: debian-bullseye
+          - CONTAINER_DISTRO: debian-12
+            CONTAINER_CMD: /bin/systemd
+            IMAGE_ALTERNATE_TAG: debian-bookworm
           - CONTAINER_DISTRO: fedora-34
           - CONTAINER_DISTRO: fedora-35
           - CONTAINER_DISTRO: fedora-36
