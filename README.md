@@ -33,6 +33,9 @@ The images were built with the help of [ansible-bender](https://ansible-communit
   - `ubuntu-22.04`, `ubuntu-jammy` : Ubuntu 22.04 LTS (Jammy Jellyfish)
   - `ubuntu-20.04`, `ubuntu-focal` : Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-18.04`, `ubuntu-bionic` : Ubuntu 18.04 LTS (Bionic Beaver)
+  - `mint-21.3`, `mint-virginia` : Linux Mint 21.3 (Virginia)
+  - `mint-20.3`, `mint-virginia` : Linux Mint 20.3 (Una)
+  - `mint-19.3`, `mint-virginia` : Linux Mint 19.3 (Tricia)
 
 ## Example
 

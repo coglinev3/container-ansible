@@ -21,49 +21,43 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run ansible-lint
-        uses: ansible/ansible-lint-action@main
+        uses: ansible-actions/ansible-lint-action@v1.0.2
+        with:
+          target: "./"
+          required_collections: 'community.general'
 
   # Build the images and push them to Docker repository.
   build:
     name: Build
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAMESPACE: coglinev3
-      BASE_IMAGE_NAME: python
-      IMAGE_NAME: ansible
+      CONTAINER_IMAGE_NAMESPACE: coglinev3
+      CONTAINER_IMAGE_NAME: ansible
     strategy:
       matrix:
         include:
           - CONTAINER_DISTRO: alpine-3.19
-            CONTAINER_CMD: /sbin/init
-            IMAGE_ALTERNATE_TAG: latest
+            CONTAINER_IMAGE_ALTERNATE_TAG: latest
           - CONTAINER_DISTRO: alpine-3.18
-            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.17
-            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.16
-            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.15
-            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.14
-            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.13
-            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: alpine-3.12
-            CONTAINER_CMD: /sbin/init
           - CONTAINER_DISTRO: amazonlinux-2023
           - CONTAINER_DISTRO: centos-7
           - CONTAINER_DISTRO: almalinux-8
           - CONTAINER_DISTRO: almalinux-9
           - CONTAINER_DISTRO: debian-10
             CONTAINER_CMD: /bin/systemd
-            IMAGE_ALTERNATE_TAG: debian-buster
+            CONTAINER_IMAGE_ALTERNATE_TAG: debian-buster
           - CONTAINER_DISTRO: debian-11
             CONTAINER_CMD: /bin/systemd
-            IMAGE_ALTERNATE_TAG: debian-bullseye
+            CONTAINER_IMAGE_ALTERNATE_TAG: debian-bullseye
           - CONTAINER_DISTRO: debian-12
             CONTAINER_CMD: /bin/systemd
-            IMAGE_ALTERNATE_TAG: debian-bookworm
+            CONTAINER_IMAGE_ALTERNATE_TAG: debian-bookworm
           - CONTAINER_DISTRO: fedora-34
           - CONTAINER_DISTRO: fedora-35
           - CONTAINER_DISTRO: fedora-36
@@ -72,13 +66,31 @@ jobs:
           - CONTAINER_DISTRO: fedora-39
           - CONTAINER_DISTRO: ubuntu-18.04
             CONTAINER_CMD: /bin/systemd
-            IMAGE_ALTERNATE_TAG: ubuntu-bionic
+            CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-bionic
           - CONTAINER_DISTRO: ubuntu-20.04
             CONTAINER_CMD: /bin/systemd
-            IMAGE_ALTERNATE_TAG: ubuntu-focal
+            CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-focal
           - CONTAINER_DISTRO: ubuntu-22.04
             CONTAINER_CMD: /bin/systemd
-            IMAGE_ALTERNATE_TAG: ubuntu-jammy
+            CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-jammy
+          - CONTAINER_DISTRO: mint-21.3
+            CONTAINER_CMD: /bin/systemd
+            CONTAINER_IMAGE_ALTERNATE_TAG: mint-virginia
+            BASE_IMAGE_NAMESPACE: linuxmintd
+            BASE_IMAGE_NAME: mint21.3-amd64
+            BASE_IMAGE_TAG: latest
+          - CONTAINER_DISTRO: mint-20.3
+            CONTAINER_CMD: /bin/systemd
+            CONTAINER_IMAGE_ALTERNATE_TAG: mint-una
+            BASE_IMAGE_NAMESPACE: linuxmintd
+            BASE_IMAGE_NAME: mint20.3-amd64
+            BASE_IMAGE_TAG: latest
+          - CONTAINER_DISTRO: mint-19.3
+            CONTAINER_CMD: /bin/systemd
+            CONTAINER_IMAGE_ALTERNATE_TAG: mint-tricia
+            BASE_IMAGE_NAMESPACE: linuxmintd
+            BASE_IMAGE_NAME: mint19.3-amd64
+            BASE_IMAGE_TAG: latest
 
     steps:
       - name: Check out the codebase.
@@ -89,10 +101,10 @@ jobs:
           echo "ANSIBLE_PYTHON_INTERPRETER=${pythonLocation}/bin/python3" >> $GITHUB_ENV
           echo "CONTAINER_DISTRO=${{ matrix.CONTAINER_DISTRO }}" >> $GITHUB_ENV
           echo "CONTAINER_CMD=${{ matrix.CONTAINER_CMD }}" >> $GITHUB_ENV
-          echo "IMAGE_ALTERNATE_TAG=${{ matrix.IMAGE_ALTERNATE_TAG }}" >> $GITHUB_ENV
-
-      - name: Debug informations
-        run: whoami; id; getent passwd; getent group
+          echo "CONTAINER_IMAGE_ALTERNATE_TAG=${{ matrix.CONTAINER_IMAGE_ALTERNATE_TAG }}" >> $GITHUB_ENV
+          echo "BASE_IMAGE_NAMESPACE=${{ matrix.BASE_IMAGE_NAMESPACE }}" >> $GITHUB_ENV
+          echo "BASE_IMAGE_NAME=${{ matrix.BASE_IMAGE_NAME }}" >> $GITHUB_ENV
+          echo "BASE_IMAGE_TAG=${{ matrix.BASE_IMAGE_TAG }}" >> $GITHUB_ENV
 
       - name: Install Ansible
         run: pip3 install --upgrade ansible docker jsonschema testresources
@@ -112,6 +124,14 @@ jobs:
       - name: Install required Ansible Role(s)
         run: ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
 
+      - name: Install crun
+        run: |
+          mkdir -p ~/.local/bin
+          curl -s -L "https://github.com/containers/crun/releases/download/${CRUN_VER}/crun-${CRUN_VER}-linux-amd64" -o ~/.local/bin/crun
+          chmod +x ~/.local/bin/crun
+        env:
+          CRUN_VER: '1.11.2'
+
       - name: Configure storage driver for podman
         run: |
           mkdir -p ~/.config/containers
@@ -121,6 +141,9 @@ jobs:
       - name: Configure runtime option for libpod
         run: cp .github/libpod.conf ~/.config/containers
 
+      - name: Configure crun for podman
+        run: cp .github/containers.conf ~/.config/containers
+
       - name: Install Ansible-Bender
         run: ansible-playbook .github/ansible-bender.yml
 
@@ -128,27 +151,27 @@ jobs:
         run: |
           sudo mkdir -p /run/user/${UID}/run
           sudo chown -R runner:docker /run/user/${UID}
-          sudo mkdir  /tmp/1001
-          sudo chown -R runner:docker /tmp/1001
-          ls -la /run/user
-          ls -la /tmp/1001
-          ls -la /proc/self/
+          sudo mkdir  /tmp/${UID}
+          sudo chown -R runner:docker /tmp/${UID}
 
-      - name: Check buildah and podman version
+      - name: "Check buildah, podman and crun version"
         run: |
           echo "podman version"
-          podman version
+          podman --version
+          echo
+          echo "crun version"
+          crun --version
           echo
           echo "buildah version"
-          buildah version
+          buildah --version
 
-      - name: Show buildah and podman info
-        run: |
-          echo "podman info"
-          podman info
-          echo
-          echo "buildah info"
-          buildah info
+          #- name: Show buildah and podman info
+          #  run: |
+          #    echo "podman info"
+          #    podman info
+          #    echo
+          #    echo "buildah info"
+          #    buildah info
 
       - name: Build image with Ansible-Bender
         run: ansible-bender build --no-cache container-ansible.yml
@@ -162,7 +185,7 @@ jobs:
       - name: Start a container from the new created image
         run: >
           podman run --detach --rm --name check_ansible
-          localhost/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}
+          localhost/${CONTAINER_IMAGE_NAMESPACE}/${CONTAINER_IMAGE_NAME}:${CONTAINER_DISTRO}
 
       - name: Show container processes
         run: podman ps -a

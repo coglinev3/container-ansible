@@ -2,19 +2,20 @@
 - name: Build Ansible container
   hosts: all
   vars:
-    image_namespace: "{{ lookup('env','IMAGE_NAMESPACE') | default('coglinev3', true) }}"
-    image_name: "{{ lookup('env','IMAGE_NAME') | default('ansible', true) }}"
-    base_image_name: "{{ lookup('env','BASE_IMAGE_NAME') | default('python', true) }}"
+    container_image_namespace: "{{ lookup('env','CONTAINER_IMAGE_NAMESPACE') | default('coglinev3', true) }}"
+    container_image_name: "{{ lookup('env','CONTAINER_IMAGE_NAME') | default('ansible', true) }}"
     container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('alpine-3.19', true) }}"
+    base_image_registry: "{{ lookup('env','BASE_IMAGE_REGISTRY') | default('docker.io', true) }}"
+    base_image_namespace: "{{ lookup('env','BASE_IMAGE_NAMESPACE') | default('coglinev3', true) }}"
+    base_image_name: "{{ lookup('env','BASE_IMAGE_NAME') | default('python', true) }}"
+    base_image_tag: "{{ lookup('env','BASE_IMAGE_TAG') | default(container_distro, true) }}"
     # configuration specific for ansible-bender
     ansible_bender:
-      # base_image: coglinev3/python:centos-7
-      base_image: "{{ image_namespace }}/{{ base_image_name }}:{{ container_distro }}"
+      base_image: "{{ base_image_registry }}/{{ base_image_namespace }}/{{ base_image_name }}:{{ base_image_tag }}"
       target_image:
         # command to run by default when invoking the container
-        cmd: "{{ lookup('env','CONTAINER_CMD') | default('/usr/sbin/init', true) }}"
-        # name: coglinev3/ansible:centos-7
-        name: "{{ image_namespace }}/{{ image_name }}:{{ container_distro }}"
+        cmd: "{{ lookup('env','CONTAINER_CMD') | default('/sbin/init', true) }}"
+        name: "localhost/{{ container_image_namespace }}/{{ container_image_name }}:{{ container_distro }}"
         labels:
           build-by: "Cogline.v3"
         volumes:
