@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-# Login to docker.io
-#echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-podman logout
+# Logout and login to docker.io
+#
+# The GitHub user is logged in to docker.io with "docker login" by default and
+# must therefore first be logged out with "docker logout" before the GitHub
+# user can log in to docker.io with podman.
+docker logout
 echo "$DOCKER_PASSWORD" | podman login -u "$DOCKER_USERNAME" --password-stdin
 
 # push the image
