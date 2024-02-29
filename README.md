@@ -2,10 +2,22 @@
 
 [![Build](https://github.com/coglinev3/container-ansible/actions/workflows/build.yml/badge.svg)](https://github.com/coglinev3/container-ansible/actions/workflows/build.yml) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/coglinev3/container-ansible) [![GitHub license](https://img.shields.io/github/license/coglinev3/container-ansible)](https://github.com/coglinev3/container-python/blob/master/LICENSE)
 
-Linux Images with [Ansible](https://docs.ansible.com/ansible/latest/index.html "Ansible Documentation") for testing Ansible roles with [Ansible Molecule](https://molecule.readthedocs.io/en/latest/ "Ansible Molecule Documentation") and a continuous integration platform like [Travis-CI](https://docs.travis-ci.com/ "Travis-CI Documentation"). All images contain Python, Ansible, SSH, Sudo and an init system (sysvinit or systemd), so that these images can be used for almost all tests as a replacement for a full-fledged virtual machine, such as for testing `service` management functionality.
+Linux Images with [Ansible](https://docs.ansible.com/ansible/latest/index.html
+"Ansible Documentation") for testing Ansible roles with [Ansible
+Molecule](https://molecule.readthedocs.io/en/latest/ "Ansible Molecule
+Documentation") and a continuous integration platform like
+[GitHub](https://docs.github.com/ "GitHub-Dokumentation"). All images
+contain Python, Ansible, SSH, Sudo and an init system (sysvinit or systemd), so
+that these images can be used for almost all tests as a replacement for a
+full-fledged virtual machine, such as for testing `service` management
+functionality.
 
-The images were built with the help of [ansible-bender](https://ansible-community.github.io/ansible-bender/build/html/index.html "ansible-bender documentation") and the Ansible role [coglinev3.ansible_container](https://galaxy.ansible.com/coglinev3/ansible_container "coglinev3.ansible_container"). Ansible-bender is a tool which bends containers using Ansible playbooks and turns them into container images.
-
+The images were built with the help of
+[ansible-bender](https://ansible-community.github.io/ansible-bender/build/html/index.html
+"ansible-bender documentation") and the Ansible role
+[coglinev3.ansible_container](https://galaxy.ansible.com/coglinev3/ansible_container
+"coglinev3.ansible_container"). Ansible-bender is a tool which bends containers
+using Ansible playbooks and turns them into container images.
 
 ## Tags
 
