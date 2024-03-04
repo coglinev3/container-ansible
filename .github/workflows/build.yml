@@ -38,17 +38,28 @@ jobs:
         include:
           - CONTAINER_DISTRO: alpine-3.19
             CONTAINER_IMAGE_ALTERNATE_TAG: latest
+            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.18
+            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.17
+            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.16
+            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.15
+            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.14
+            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.13
+            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.12
+            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: amazonlinux-2023
           - CONTAINER_DISTRO: centos-7
+            PYTHON_INTERPRETER: /usr/bin/python2
           - CONTAINER_DISTRO: almalinux-8
+            PYTHON_INTERPRETER: /usr/libexec/platform-python
           - CONTAINER_DISTRO: almalinux-9
+            PYTHON_INTERPRETER: /usr/libexec/platform-python
           - CONTAINER_DISTRO: debian-10
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-buster
@@ -98,7 +109,7 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "ANSIBLE_PYTHON_INTERPRETER=${pythonLocation}/bin/python3" >> $GITHUB_ENV
+          echo "PYTHON_INTERPRETER=${{ matrix.PYTHON_INTERPRETER || '/usr/bin/python3' }}" >> $GITHUB_ENV
           echo "CONTAINER_DISTRO=${{ matrix.CONTAINER_DISTRO }}" >> $GITHUB_ENV
           echo "CONTAINER_CMD=${{ matrix.CONTAINER_CMD }}" >> $GITHUB_ENV
           echo "CONTAINER_IMAGE_ALTERNATE_TAG=${{ matrix.CONTAINER_IMAGE_ALTERNATE_TAG }}" >> $GITHUB_ENV
@@ -109,17 +120,12 @@ jobs:
       - name: Install Ansible
         run: pip3 install --upgrade ansible docker jsonschema testresources
 
-      - name: Create Ansible roles directory
-        run: mkdir -p ~/.ansible/roles
-
       - name: Configure Ansible
-        run: cp .github/ansible.cfg ~/.ansible.cfg
-
-      - name: Set up Ansible inventory file
-        run: cp .github/hosts ~/.ansible/hosts
-
-      - name: Show Ansible version
-        run: ansible --version
+        run: |
+          mkdir -p ~/.ansible/roles
+          cp .github/ansible.cfg ~/.ansible.cfg
+          cp .github/hosts ~/.ansible/hosts
+          ansible --version
 
       - name: Install required Ansible Role(s)
         run: ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
@@ -132,17 +138,13 @@ jobs:
         env:
           CRUN_VER: '1.11.2'
 
-      - name: Configure storage driver for podman
+      - name: Configure storage driver, runtime and crun for podman
         run: |
           mkdir -p ~/.config/containers
           cp .github/storage.conf ~/.config/containers
           mkdir -p /home/runner/.local/share/containers/storage
-
-      - name: Configure runtime option for libpod
-        run: cp .github/libpod.conf ~/.config/containers
-
-      - name: Configure crun for podman
-        run: cp .github/containers.conf ~/.config/containers
+          cp .github/libpod.conf ~/.config/containers
+          cp .github/containers.conf ~/.config/containers
 
       - name: Install Ansible-Bender
         run: ansible-playbook .github/ansible-bender.yml
@@ -165,16 +167,8 @@ jobs:
           echo "buildah version"
           buildah --version
 
-          #- name: Show buildah and podman info
-          #  run: |
-          #    echo "podman info"
-          #    podman info
-          #    echo
-          #    echo "buildah info"
-          #    buildah info
-
       - name: Build image with Ansible-Bender
-        run: ansible-bender build --no-cache container-ansible.yml
+        run: ansible-bender build --no-cache --python-interpreter=${PYTHON_INTERPRETER} container-ansible.yml
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'

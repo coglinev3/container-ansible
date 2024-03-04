@@ -1,14 +1,15 @@
 ---
 - name: Build Ansible container
   hosts: all
+  gather_facts: false
   vars:
     container_image_namespace: "{{ lookup('env','CONTAINER_IMAGE_NAMESPACE') | default('coglinev3', true) }}"
     container_image_name: "{{ lookup('env','CONTAINER_IMAGE_NAME') | default('ansible', true) }}"
-    container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('alpine-3.19', true) }}"
+    container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('debian-12', true) }}"
     base_image_registry: "{{ lookup('env','BASE_IMAGE_REGISTRY') | default('docker.io', true) }}"
-    base_image_namespace: "{{ lookup('env','BASE_IMAGE_NAMESPACE') | default('coglinev3', true) }}"
-    base_image_name: "{{ lookup('env','BASE_IMAGE_NAME') | default('python', true) }}"
-    base_image_tag: "{{ lookup('env','BASE_IMAGE_TAG') | default(container_distro, true) }}"
+    base_image_namespace: "{{ lookup('env','BASE_IMAGE_NAMESPACE') | default('library', true) }}"
+    base_image_name: "{{ lookup('env','BASE_IMAGE_NAME') | default(container_distro.split('-')[0], true) }}"
+    base_image_tag: "{{ lookup('env','BASE_IMAGE_TAG') | default(container_distro.split('-')[1], true) }}"
     # configuration specific for ansible-bender
     ansible_bender:
       base_image: "{{ base_image_registry }}/{{ base_image_namespace }}/{{ base_image_name }}:{{ base_image_tag }}"
@@ -20,6 +21,14 @@
           build-by: "Cogline.v3"
         volumes:
           - /sys/fs/cgroup
+
+  pre_tasks:
+    - name: "Install python if needed"
+      ansible.builtin.include_role:
+        name: "coglinev3.ansible_python"
+    - name: Gather facts
+      ansible.builtin.setup:
+
   tasks:
     - name: Include role coglinev3.ansible_container
       ansible.builtin.include_role:

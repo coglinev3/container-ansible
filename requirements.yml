@@ -8,3 +8,7 @@
 - src: coglinev3.ansible_bender
   version: master
   name: coglinev3.ansible_bender
+
+- src: coglinev3.ansible_python
+  version: master
+  name: coglinev3.ansible_python
