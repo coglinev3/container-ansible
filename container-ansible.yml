@@ -23,11 +23,29 @@
           - /sys/fs/cgroup
 
   pre_tasks:
-    - name: "Install python if needed"
+    - name: Check for Alpine Linux
+      ansible.builtin.raw: test -e /sbin/apk
+      register: alpine_linux
+      failed_when: false
+      changed_when: alpine_linux.rc == 0
+      tags:
+        - stop-layering
+    - name: Install bash on Alpine Linux
+      ansible.builtin.raw: apk add --update-cache bash
+      args:
+        creates: /bin/bash
+      when: alpine_linux.changed
+      tags:
+        - stop-layering
+    - name: Install Python if necessary
       ansible.builtin.include_role:
         name: "coglinev3.ansible_python"
+      tags:
+        - stop-layering
     - name: Gather facts
       ansible.builtin.setup:
+      tags:
+        - stop-layering
 
   tasks:
     - name: Include role coglinev3.ansible_container
