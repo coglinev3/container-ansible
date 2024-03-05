@@ -38,21 +38,13 @@ jobs:
         include:
           - CONTAINER_DISTRO: alpine-3.19
             CONTAINER_IMAGE_ALTERNATE_TAG: latest
-            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.18
-            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.17
-            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.16
-            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.15
-            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.14
-            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.13
-            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine-3.12
-            BASE_IMAGE_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: amazonlinux-2023
           - CONTAINER_DISTRO: centos-7
             PYTHON_INTERPRETER: /usr/bin/python2
@@ -181,18 +173,23 @@ jobs:
           podman run --detach --rm --name check_ansible
           localhost/${CONTAINER_IMAGE_NAMESPACE}/${CONTAINER_IMAGE_NAME}:${CONTAINER_DISTRO}
 
-      - name: Show container processes
+      - name: Show podman processes
         run: podman ps -a
+
+      - name: Show container os-release
+        run: >
+          podman exec --user ansible check_ansible env TERM=xterm
+          /bin/bash -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
 
       - name: Show container Ansible version
         run: >
           podman exec --user ansible check_ansible env TERM=xterm
           ansible --version
 
-      - name: Show container os-release
+      - name: Show container bash version
         run: >
           podman exec --user ansible check_ansible env TERM=xterm
-          /bin/bash -c "ansible localhost -m setup -a 'filter=ansible_distribution*'"
+          bash --version
 
       - name: Check if SSH is running inside the container
         run: >
