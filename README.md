@@ -52,22 +52,22 @@ using Ansible playbooks and turns them into container images.
 ## Example
 
 
-Here is an example playbook to create a CentOS 7 image with Ansible and Systemd
+Here is an example playbook to create a Debian 12 image with Ansible and Systemd
 
 ```yml
 ---
-- name: Containerized version of CentOS 7 with ansible
+- name: Containerized version of Debian 12 with ansible
   hosts: all
   vars:
     # configuration specific for ansible-bender
     ansible_bender:
-      base_image: centos:7
+      base_image: docker.io/library/debian:12
       target_image:
         # command to run by default when invoking the container
-        cmd: /usr/sbin/init
-        name: centos:7-ansible
+        cmd: /bin/systemd
+        name: "localhost/{{ lookup('env','USER') }}/ansible:debian-12"
         labels:
-          build-by: "Cogline.v3"
+          build-by: "{{ lookup('env','USER') }}"
         volumes:
           - /sys/fs/cgroup
   tasks:
@@ -90,7 +90,7 @@ ansible-bender build ./playbook.yml
 
 ## Version
 
-Release: 1.14.1
+Release: 1.15.0
 
 ## License
 
@@ -98,4 +98,4 @@ GNU GPLv3
 
 ## Author Information
 
-Copyright &copy; 2024 Cogline.v3.
+Copyright &copy; 2020 - 2024 Cogline.v3.
