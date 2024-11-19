@@ -44,12 +44,7 @@ jobs:
           - CONTAINER_DISTRO: alpine-3.15
           - CONTAINER_DISTRO: alpine-3.14
           - CONTAINER_DISTRO: alpine-3.13
-          - CONTAINER_DISTRO: alpine-3.12
           - CONTAINER_DISTRO: amazonlinux-2023
-          - CONTAINER_DISTRO: centos-7
-            PYTHON_INTERPRETER: /usr/bin/python2
-          - CONTAINER_DISTRO: almalinux-8
-            PYTHON_INTERPRETER: /usr/libexec/platform-python
           - CONTAINER_DISTRO: almalinux-9
             PYTHON_INTERPRETER: /usr/libexec/platform-python
           - CONTAINER_DISTRO: debian-10
@@ -67,33 +62,12 @@ jobs:
           - CONTAINER_DISTRO: fedora-37
           - CONTAINER_DISTRO: fedora-38
           - CONTAINER_DISTRO: fedora-39
-          - CONTAINER_DISTRO: ubuntu-18.04
-            CONTAINER_CMD: /bin/systemd
-            CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-bionic
           - CONTAINER_DISTRO: ubuntu-20.04
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-focal
           - CONTAINER_DISTRO: ubuntu-22.04
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-jammy
-          - CONTAINER_DISTRO: mint-21.3
-            CONTAINER_CMD: /bin/systemd
-            CONTAINER_IMAGE_ALTERNATE_TAG: mint-virginia
-            BASE_IMAGE_NAMESPACE: linuxmintd
-            BASE_IMAGE_NAME: mint21.3-amd64
-            BASE_IMAGE_TAG: latest
-          - CONTAINER_DISTRO: mint-20.3
-            CONTAINER_CMD: /bin/systemd
-            CONTAINER_IMAGE_ALTERNATE_TAG: mint-una
-            BASE_IMAGE_NAMESPACE: linuxmintd
-            BASE_IMAGE_NAME: mint20.3-amd64
-            BASE_IMAGE_TAG: latest
-          - CONTAINER_DISTRO: mint-19.3
-            CONTAINER_CMD: /bin/systemd
-            CONTAINER_IMAGE_ALTERNATE_TAG: mint-tricia
-            BASE_IMAGE_NAMESPACE: linuxmintd
-            BASE_IMAGE_NAME: mint19.3-amd64
-            BASE_IMAGE_TAG: latest
 
     steps:
       - name: Check out the codebase.
@@ -120,7 +94,8 @@ jobs:
           ansible --version
 
       - name: Install required Ansible Role(s)
-        run: ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
+        # run: ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
+        run: ansible-galaxy install -r .github/requirements.yml -p ~/.ansible/roles
 
       - name: Install crun
         run: |

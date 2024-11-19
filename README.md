@@ -28,10 +28,7 @@ using Ansible playbooks and turns them into container images.
   - `alpine-3.15` : Alpine Linux 3.15
   - `alpine-3.14` : Alpine Linux 3.14
   - `alpine-3.13` : Alpine Linux 3.13
-  - `alpine-3.12` : Alpine Linux 3.12
   - `amazonlinux-2023` : Amazon Linux 2023
-  - `centos-7` : CentOS 7
-  - `almalinux-8` : AlmaLinux 8
   - `almalinux-9` : AlmaLinux 9
   - `debian-12`, `debian-bookworm` : Debian 12 (Bookworm)
   - `debian-11`, `debian-bullseye` : Debian 11 (Bullseye)
@@ -44,10 +41,6 @@ using Ansible playbooks and turns them into container images.
   - `fedora-39` : Fedore 39
   - `ubuntu-22.04`, `ubuntu-jammy` : Ubuntu 22.04 LTS (Jammy Jellyfish)
   - `ubuntu-20.04`, `ubuntu-focal` : Ubuntu 20.04 LTS (Focal Fossa)
-  - `ubuntu-18.04`, `ubuntu-bionic` : Ubuntu 18.04 LTS (Bionic Beaver)
-  - `mint-21.3`, `mint-virginia` : Linux Mint 21.3 (Virginia)
-  - `mint-20.3`, `mint-virginia` : Linux Mint 20.3 (Una)
-  - `mint-19.3`, `mint-virginia` : Linux Mint 19.3 (Tricia)
 
 ## Example
 
