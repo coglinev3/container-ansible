@@ -41,6 +41,8 @@ using Ansible playbooks and turns them into container images.
   - `fedora-37` : Fedore 37
   - `fedora-38` : Fedore 38
   - `fedora-39` : Fedore 39
+  - `fedora-40` : Fedore 40
+  - `fedora-41` : Fedore 41
   - `ubuntu-22.04`, `ubuntu-jammy` : Ubuntu 22.04 LTS (Jammy Jellyfish)
   - `ubuntu-20.04`, `ubuntu-focal` : Ubuntu 20.04 LTS (Focal Fossa)
 

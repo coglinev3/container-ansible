@@ -64,6 +64,8 @@ jobs:
           - CONTAINER_DISTRO: fedora-37
           - CONTAINER_DISTRO: fedora-38
           - CONTAINER_DISTRO: fedora-39
+          - CONTAINER_DISTRO: fedora-40
+          - CONTAINER_DISTRO: fedora-41
           - CONTAINER_DISTRO: ubuntu-20.04
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-focal
