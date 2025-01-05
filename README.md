@@ -21,7 +21,9 @@ using Ansible playbooks and turns them into container images.
 
 ## Tags
 
-  - `alpine-3.19`, `latest` : Alpine Linux 3.19
+  - `alpine-3.21`, `latest` : Alpine Linux 3.21
+  - `alpine-3.20` : Alpine Linux 3.20
+  - `alpine-3.19` : Alpine Linux 3.19
   - `alpine-3.18` : Alpine Linux 3.18
   - `alpine-3.17` : Alpine Linux 3.17
   - `alpine-3.16` : Alpine Linux 3.16

@@ -36,8 +36,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - CONTAINER_DISTRO: alpine-3.19
+          - CONTAINER_DISTRO: alpine-3.21
             CONTAINER_IMAGE_ALTERNATE_TAG: latest
+          - CONTAINER_DISTRO: alpine-3.20
+          - CONTAINER_DISTRO: alpine-3.19
           - CONTAINER_DISTRO: alpine-3.18
           - CONTAINER_DISTRO: alpine-3.17
           - CONTAINER_DISTRO: alpine-3.16
