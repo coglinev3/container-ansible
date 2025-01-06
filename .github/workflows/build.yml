@@ -63,7 +63,7 @@ jobs:
           - CONTAINER_DISTRO: fedora-36
           - CONTAINER_DISTRO: fedora-35
           - CONTAINER_DISTRO: fedora-34
-          - CONTAINER_DISTRO: ubuntu-22.04
+          - CONTAINER_DISTRO: ubuntu-24.04
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-noble
           - CONTAINER_DISTRO: ubuntu-22.04
