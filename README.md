@@ -34,7 +34,6 @@ using Ansible playbooks and turns them into container images.
   - `almalinux-9` : AlmaLinux 9
   - `debian-12`, `debian-bookworm` : Debian 12 (Bookworm)
   - `debian-11`, `debian-bullseye` : Debian 11 (Bullseye)
-  - `debian-10`, `debian-buster` : Debian 10 (Buster)
   - `fedora-41` : Fedore 41
   - `fedora-40` : Fedore 40
   - `fedora-39` : Fedore 39
