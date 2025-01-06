@@ -35,14 +35,15 @@ using Ansible playbooks and turns them into container images.
   - `debian-12`, `debian-bookworm` : Debian 12 (Bookworm)
   - `debian-11`, `debian-bullseye` : Debian 11 (Bullseye)
   - `debian-10`, `debian-buster` : Debian 10 (Buster)
-  - `fedora-34` : Fedore 34
-  - `fedora-35` : Fedore 35
-  - `fedora-36` : Fedore 36
-  - `fedora-37` : Fedore 37
-  - `fedora-38` : Fedore 38
-  - `fedora-39` : Fedore 39
-  - `fedora-40` : Fedore 40
   - `fedora-41` : Fedore 41
+  - `fedora-40` : Fedore 40
+  - `fedora-39` : Fedore 39
+  - `fedora-38` : Fedore 38
+  - `fedora-37` : Fedore 37
+  - `fedora-36` : Fedore 36
+  - `fedora-35` : Fedore 35
+  - `fedora-34` : Fedore 34
+  - `ubuntu-24.04`, `ubuntu-jammy` : Ubuntu 24.04 LTS (Noble Numbat)
   - `ubuntu-22.04`, `ubuntu-jammy` : Ubuntu 22.04 LTS (Jammy Jellyfish)
   - `ubuntu-20.04`, `ubuntu-focal` : Ubuntu 20.04 LTS (Focal Fossa)
 

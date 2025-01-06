@@ -49,29 +49,32 @@ jobs:
           - CONTAINER_DISTRO: amazonlinux-2023
           - CONTAINER_DISTRO: almalinux-9
             PYTHON_INTERPRETER: /usr/libexec/platform-python
-          - CONTAINER_DISTRO: debian-10
-            CONTAINER_CMD: /bin/systemd
-            CONTAINER_IMAGE_ALTERNATE_TAG: debian-buster
-          - CONTAINER_DISTRO: debian-11
-            CONTAINER_CMD: /bin/systemd
-            CONTAINER_IMAGE_ALTERNATE_TAG: debian-bullseye
           - CONTAINER_DISTRO: debian-12
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-bookworm
-          - CONTAINER_DISTRO: fedora-34
-          - CONTAINER_DISTRO: fedora-35
-          - CONTAINER_DISTRO: fedora-36
-          - CONTAINER_DISTRO: fedora-37
-          - CONTAINER_DISTRO: fedora-38
-          - CONTAINER_DISTRO: fedora-39
-          - CONTAINER_DISTRO: fedora-40
-          - CONTAINER_DISTRO: fedora-41
-          - CONTAINER_DISTRO: ubuntu-20.04
+          - CONTAINER_DISTRO: debian-11
             CONTAINER_CMD: /bin/systemd
-            CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-focal
+            CONTAINER_IMAGE_ALTERNATE_TAG: debian-bullseye
+          - CONTAINER_DISTRO: debian-10
+            CONTAINER_CMD: /bin/systemd
+            CONTAINER_IMAGE_ALTERNATE_TAG: debian-buster
+          - CONTAINER_DISTRO: fedora-41
+          - CONTAINER_DISTRO: fedora-40
+          - CONTAINER_DISTRO: fedora-39
+          - CONTAINER_DISTRO: fedora-38
+          - CONTAINER_DISTRO: fedora-37
+          - CONTAINER_DISTRO: fedora-36
+          - CONTAINER_DISTRO: fedora-35
+          - CONTAINER_DISTRO: fedora-34
+          - CONTAINER_DISTRO: ubuntu-22.04
+            CONTAINER_CMD: /bin/systemd
+            CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-noble
           - CONTAINER_DISTRO: ubuntu-22.04
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-jammy
+          - CONTAINER_DISTRO: ubuntu-20.04
+            CONTAINER_CMD: /bin/systemd
+            CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-focal
 
     steps:
       - name: Check out the codebase.
