@@ -45,7 +45,6 @@ jobs:
           - CONTAINER_DISTRO: alpine-3.16
           - CONTAINER_DISTRO: alpine-3.15
           - CONTAINER_DISTRO: alpine-3.14
-          - CONTAINER_DISTRO: alpine-3.13
           - CONTAINER_DISTRO: amazonlinux-2023
           - CONTAINER_DISTRO: almalinux-9
             PYTHON_INTERPRETER: /usr/libexec/platform-python
