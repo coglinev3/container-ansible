@@ -68,9 +68,6 @@ jobs:
           - CONTAINER_DISTRO: ubuntu-22.04
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-jammy
-          - CONTAINER_DISTRO: ubuntu-20.04
-            CONTAINER_CMD: /bin/systemd
-            CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-focal
 
     steps:
       - name: Check out the codebase.
