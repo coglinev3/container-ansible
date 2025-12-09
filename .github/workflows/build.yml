@@ -57,6 +57,7 @@ jobs:
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-bookworm
           - CONTAINER_DISTRO: debian-11
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-bullseye
+          - CONTAINER_DISTRO: fedora-42
           - CONTAINER_DISTRO: fedora-41
           - CONTAINER_DISTRO: fedora-40
           - CONTAINER_DISTRO: ubuntu-24.04

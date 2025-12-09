@@ -36,6 +36,7 @@ using Ansible playbooks and turns them into container images.
   - `debian-13`, `debian-trixie` : Debian 13 (Trixie)
   - `debian-12`, `debian-bookworm` : Debian 12 (Bookworm)
   - `debian-11`, `debian-bullseye` : Debian 11 (Bullseye)
+  - `fedora-42` : Fedore 42
   - `fedora-41` : Fedore 41
   - `fedora-40` : Fedore 40
   - `ubuntu-24.04`, `ubuntu-jammy` : Ubuntu 24.04 LTS (Noble Numbat)
