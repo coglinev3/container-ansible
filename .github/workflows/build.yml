@@ -51,6 +51,9 @@ jobs:
             PYTHON_INTERPRETER: /usr/libexec/platform-python
           - CONTAINER_DISTRO: almalinux-10
             PYTHON_INTERPRETER: /usr/libexec/platform-python
+          - CONTAINER_DISTRO: debian-13
+            CONTAINER_CMD: /bin/systemd
+            CONTAINER_IMAGE_ALTERNATE_TAG: debian-trixie
           - CONTAINER_DISTRO: debian-12
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-bookworm
