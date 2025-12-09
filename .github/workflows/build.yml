@@ -57,12 +57,6 @@ jobs:
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-bullseye
           - CONTAINER_DISTRO: fedora-41
           - CONTAINER_DISTRO: fedora-40
-          - CONTAINER_DISTRO: fedora-39
-          - CONTAINER_DISTRO: fedora-38
-          - CONTAINER_DISTRO: fedora-37
-          - CONTAINER_DISTRO: fedora-36
-          - CONTAINER_DISTRO: fedora-35
-          - CONTAINER_DISTRO: fedora-34
           - CONTAINER_DISTRO: ubuntu-24.04
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-noble
