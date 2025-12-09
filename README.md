@@ -21,7 +21,8 @@ using Ansible playbooks and turns them into container images.
 
 ## Tags
 
-  - `alpine-3.21`, `latest` : Alpine Linux 3.21
+  - `alpine-3.22`, `latest` : Alpine Linux 3.22
+  - `alpine-3.21` : Alpine Linux 3.21
   - `alpine-3.20` : Alpine Linux 3.20
   - `alpine-3.19` : Alpine Linux 3.19
   - `alpine-3.18` : Alpine Linux 3.18
@@ -29,7 +30,6 @@ using Ansible playbooks and turns them into container images.
   - `alpine-3.16` : Alpine Linux 3.16
   - `alpine-3.15` : Alpine Linux 3.15
   - `alpine-3.14` : Alpine Linux 3.14
-  - `alpine-3.13` : Alpine Linux 3.13
   - `amazonlinux-2023` : Amazon Linux 2023
   - `almalinux-9` : AlmaLinux 9
   - `debian-12`, `debian-bookworm` : Debian 12 (Bookworm)
