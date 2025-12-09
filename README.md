@@ -32,6 +32,7 @@ using Ansible playbooks and turns them into container images.
   - `alpine-3.14` : Alpine Linux 3.14
   - `amazonlinux-2023` : Amazon Linux 2023
   - `almalinux-9` : AlmaLinux 9
+  - `almalinux-10` : AlmaLinux 10
   - `debian-12`, `debian-bookworm` : Debian 12 (Bookworm)
   - `debian-11`, `debian-bullseye` : Debian 11 (Bullseye)
   - `fedora-41` : Fedore 41

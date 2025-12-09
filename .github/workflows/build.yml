@@ -49,6 +49,8 @@ jobs:
           - CONTAINER_DISTRO: amazonlinux-2023
           - CONTAINER_DISTRO: almalinux-9
             PYTHON_INTERPRETER: /usr/libexec/platform-python
+          - CONTAINER_DISTRO: almalinux-10
+            PYTHON_INTERPRETER: /usr/libexec/platform-python
           - CONTAINER_DISTRO: debian-12
             CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-bookworm
