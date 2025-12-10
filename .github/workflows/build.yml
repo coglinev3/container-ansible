@@ -52,21 +52,16 @@ jobs:
           - CONTAINER_DISTRO: almalinux-10
             PYTHON_INTERPRETER: /usr/libexec/platform-python
           - CONTAINER_DISTRO: debian-13
-            CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-trixie
           - CONTAINER_DISTRO: debian-12
-            CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-bookworm
           - CONTAINER_DISTRO: debian-11
-            CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: debian-bullseye
           - CONTAINER_DISTRO: fedora-41
           - CONTAINER_DISTRO: fedora-40
           - CONTAINER_DISTRO: ubuntu-24.04
-            CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-noble
           - CONTAINER_DISTRO: ubuntu-22.04
-            CONTAINER_CMD: /bin/systemd
             CONTAINER_IMAGE_ALTERNATE_TAG: ubuntu-jammy
 
     steps:
